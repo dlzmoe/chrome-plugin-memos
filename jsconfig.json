@@ -1,0 +1,6 @@
+{
+  "include": ["./src/**/*"],
+  "typeAcquisition": {
+    "include": ["chrome", "vue", "dom"]
+  }
+}
