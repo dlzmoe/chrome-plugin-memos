@@ -5,9 +5,13 @@
       <li @click="setting" v-bind:class="{ active: box2 }">设置</li>
     </ul>
     <div class="tabcontent" v-show="box1">
-      <div class="textarea-wrap">
+      <div class="textarea-wrap" :class="{ isActive: isActive }">
         <textarea placeholder="开始编辑..." v-model="textarea"></textarea>
-        <button @click="setNote">发布笔记</button>
+        <div class="btn">
+          <button @click="setNote" v-show="common">记下</button>
+          <button @click="cancelEdit" v-show="editCommon">取消编辑</button>
+          <button @click="saveEditNote()" v-show="editCommon">记下</button>
+        </div>
       </div>
       <div class="list">
         <div class="item" v-for="(item, index) in list" :key="index" :data-id="item.id">
@@ -31,8 +35,8 @@
       </div>
       <button @click="save" class="save">保存</button>
       <div class="about">
-        <p>目前版本仅可查看笔记信息，暂不可编辑，发布。</p>
-        <p>开发者：子舒</p>
+        <p>热爱生活，热爱开源，我是子舒。</p>
+        <p>Github: <a href="https://github.com/lovezsh/chrome-plugin-memos">https://github.com/lovezsh/chrome-plugin-memos</a></p>
       </div>
     </div>
   </div>
@@ -53,7 +57,11 @@ export default {
       list: [],
       listerr: true,
       // 编辑框
+      isActive: false,
       textarea: "",
+      EditNoteId: '',
+      common: true,
+      editCommon: false,
     };
   },
   methods: {
@@ -81,11 +89,13 @@ export default {
     },
     // 获取数据列表
     getList() {
+      const loading = this.$vs.loading();
       axios
         .get(this.site + "/api/memo?openId=" + this.openId + '&rowStatus=NORMAL')
         .then((response) => {
           this.list = response.data.data;
           this.listerr = false;
+          loading.close();
         })
         .catch((error) => {
           console.error(error);
@@ -109,17 +119,47 @@ export default {
     // 双击笔记进入编辑状态
     goEditItem() {
       const id = event.currentTarget.parentNode.dataset.id;
-      console.log(id); // 在这里可以获取到当前被点击的元素的data-id属性值
+      this.EditNoteId = id;
       axios.get(this.site + "/api/memo/" + id)
         .then(response => {
-          console.log(response.data);
+          this.isActive = true;
           this.textarea = response.data.data.content;
+          this.editCommon = true;
+          this.common = false;
         })
         .catch(error => {
           console.error(error);
         });
 
-      // 如果是历史笔记需要 PATCH PATCH
+    },
+    // 如果是历史笔记需要 PATCH 
+    saveEditNote() {
+      const loading = this.$vs.loading();
+      axios.patch(this.site + "/api/memo/" + this.EditNoteId, {
+        content: this.textarea,
+        id: this.EditNoteId,
+        resourceIdList: [],
+        rowStatus: "NORMAL",
+      })
+        .then(response => {
+          this.isActive = false;
+          this.getList();
+          loading.close();
+          this.textarea = '';
+
+          this.editCommon = false;
+          this.common = true;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+    // 取消编辑
+    cancelEdit() {
+      this.isActive = false;
+      this.textarea = '';
+      this.editCommon = false;
+      this.common = true;
     },
     golist() {
       this.box1 = true;
@@ -132,11 +172,20 @@ export default {
     save() {
       localStorage.setItem("site", JSON.stringify(this.site));
       localStorage.setItem("openId", JSON.stringify(this.openId));
+      this.openNotification();
 
       this.getList();
       this.box1 = true;
       this.box2 = false;
     },
+    openNotification(position = null) {
+      const noti = this.$vs.notification({
+        position: 'top-center',
+        color: '#000',
+        duration: '1000',
+        title: '保存成功！',
+      })
+    }
   },
   mounted() {
     this.site = JSON.parse(localStorage.getItem("site"));

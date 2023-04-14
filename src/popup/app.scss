@@ -100,7 +100,7 @@ body {
 }
 
 .tabcontent {
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 
 .list {
@@ -156,11 +156,18 @@ body {
   height: 100px;
   width: 100%;
 
+  &.isActive {
+    height: 150px;
+    position: sticky;
+    top: 46px;
+    z-index: 9;
+  }
+
   textarea {
     padding-bottom: 30px;
   }
 
-  button {
+  .btn {
     position: absolute;
     bottom: 5px;
     right: 10px;
@@ -174,4 +181,8 @@ body {
   p {
     margin-bottom: 10px;
   }
+}
+
+.vue-simple-markdown {
+  font-size: 15px !important;
 }

@@ -7,6 +7,12 @@ import VueSimpleMarkdown from 'vue-simple-markdown'
 import 'vue-simple-markdown/dist/vue-simple-markdown.css'
 
 Vue.use(VueSimpleMarkdown)
+import Vuesax from 'vuesax'
+import 'vuesax/dist/vuesax.css' //Vuesax styles
+
+Vue.use(Vuesax, {
+  // options here
+})
 
 // eslint-disable-next-line
 new Vue({
