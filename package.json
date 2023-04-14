@@ -34,7 +34,7 @@
     "webpack-extension-reloader": "^1.1.4"
   },
   "license": "MIT",
-  "name": "vue-chrome-extension-boilerplate",
+  "name": "chrome-plugin-memos",
   "scripts": {
     "build": "npm run pack && npm run remove-evals && npm run zip",
     "dev": "webpack --mode=development --env.NODE_ENV=development --progress --hide-modules --hot --watch",

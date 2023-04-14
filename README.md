@@ -4,6 +4,10 @@ Boilerplate for Chrome extension using Vue.js and Webpack with hot-reload enable
 
 Memos的chrome插件。
 
+|![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/3a6f074b6636ff8707f4a9d294149e5.6x3izcjwics0.webp)|![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/54fd40d05feb4ef0f38bba0ee5df28f.5v6pu5m8no40.webp)|
+|---|---|
+|![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/e87276d5e179b5bf769a2b29bbefa7f.1dfnku7pz2ps.webp)||
+
 ## 功能
 
 在设置中中输入网站域名、以及 openId进行配置。
