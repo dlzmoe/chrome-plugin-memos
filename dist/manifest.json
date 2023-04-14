@@ -1,0 +1,33 @@
+{
+  "background": {
+    "scripts": ["./background.js"]
+  },
+  "browser_action": {
+    "default_icon": "assets/icons/icon.png",
+    "default_popup": "./popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": ["./contentScripts.js"],
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "memos chrome插件",
+  "icons": {
+    "16": "assets/icons/icon.png",
+    "32": "assets/icons/icon.png",
+    "64": "assets/icons/icon.png",
+    "128": "assets/icons/icon.png"
+  },
+  "manifest_version": 2,
+  "name": "Memos 插件",
+  "options_ui": {
+    "chrome_style": false,
+    "page": "./options.html"
+  },
+  "permissions": ["http://*/*", "https://*/*", "storage", "tabs", "webRequest"],
+  "version": "1.0.0"
+}
