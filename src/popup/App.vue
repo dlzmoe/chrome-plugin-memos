@@ -7,14 +7,15 @@
     <div class="tabcontent" v-show="box1">
       <div class="textarea-wrap">
         <textarea placeholder="开始编辑..." v-model="textarea"></textarea>
-        <button @click="publish">发布笔记</button>
+        <button @click="setNote">发布笔记</button>
       </div>
       <div class="list">
-        <div class="item" v-for="(item, index) in list" :key="index">
+        <div class="item" v-for="(item, index) in list" :key="index" :data-id="item.id">
           <div class="date">{{ formatDate(item.createdTs) }}</div>
           <div class="content">
             <vue-simple-markdown :source="item.content"></vue-simple-markdown>
           </div>
+          <span class="deleteNote" @click="deleteNote($event)">delete!</span>
         </div>
       </div>
       <p v-show="listerr">请配置参数！</p>
@@ -56,23 +57,31 @@ export default {
   methods: {
     // 发布笔记
     setNote() {
-      axios
-        .post(this.site + "/api/memo", {
-          content: this.textarea,
-          visibility: "PRIVATE",
-          resourceIdList: [],
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      if (this.textarea != '') {
+        axios
+          .post(this.site + "/api/memo", {
+            content: this.textarea,
+            visibility: "PRIVATE",
+            resourceIdList: [],
+          })
+          .then((response) => {
+            console.log(response.data);
+            this.textarea = '';
+            this.getList();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+      } else {
+        alert('禁止留空');
+      }
+
     },
     // 获取数据
     getList() {
       axios
-        .get(this.site + "/api/memo?openId=" + this.openId)
+        .get(this.site + "/api/memo?openId=" + this.openId + '&rowStatus=NORMAL')
         .then((response) => {
           this.list = response.data.data;
           this.listerr = false;
@@ -81,6 +90,22 @@ export default {
         .catch((error) => {
           console.error(error);
           this.listerr = true;
+        });
+    },
+    // 归档某笔记
+    deleteNote() {
+      const id = event.currentTarget.parentNode.dataset.id;
+      console.log(id); // 在这里可以获取到当前被点击的元素的data-id属性值
+      axios.patch(this.site + "/api/memo/" + id, {
+        id: id,
+        rowStatus: "ARCHIVED",
+      })
+        .then(response => {
+          console.log(response.data);
+          this.getList();
+        })
+        .catch(error => {
+          console.error(error);
         });
     },
     golist() {
@@ -98,12 +123,6 @@ export default {
       this.getList();
       this.box1 = true;
       this.box2 = false;
-    },
-    publish() {
-      if (this.textarea != "") {
-        this.setNote();
-        this.getList();
-      }
     },
   },
   mounted() {
@@ -139,14 +158,17 @@ export default {
   border-radius: 0.8em;
   background-clip: padding-box;
 }
+
 body {
   width: 500px;
   height: 600px;
 }
+
 .body {
   min-height: 600px;
   background: #f3f3f3;
 }
+
 .tags {
   display: flex;
   align-items: center;
@@ -156,6 +178,7 @@ body {
   padding: 10px;
   background: #f3f3f3;
   z-index: 9;
+
   li {
     margin-right: 10px;
     padding: 4px 10px;
@@ -170,11 +193,14 @@ body {
     }
   }
 }
+
 .tabcontent {
   padding: 10px;
 }
+
 .list {
   .item {
+    position: relative;
     margin-bottom: 10px;
     max-width: 100%;
     padding: 15px;
@@ -183,15 +209,31 @@ body {
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
     word-break: break-all;
 
+    &:hover {
+      .deleteNote {
+        display: block;
+      }
+    }
+
     .date {
       font-size: 14px;
       color: #999;
+    }
+
+    .deleteNote {
+      position: absolute;
+      right: 10px;
+      bottom: 4px;
+      cursor: pointer;
+      user-select: none;
+      display: none;
     }
   }
 }
 
 .setting {
   font-size: 15px;
+
   .item {
     display: flex;
     align-items: center;
@@ -201,6 +243,7 @@ body {
       width: 50px;
     }
   }
+
   input {
     flex: 1;
     outline: none;
@@ -257,5 +300,6 @@ body {
     cursor: pointer;
     user-select: none;
   }
+
 }
 </style>

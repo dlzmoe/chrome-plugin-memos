@@ -22,7 +22,7 @@
     "64": "assets/icons/icon.png",
     "128": "assets/icons/icon.png"
   },
-  "manifest_version": 1,
+  "manifest_version": 2,
   "name": "Memos 插件",
   "options_ui": {
     "chrome_style": false,
