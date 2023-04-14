@@ -11,9 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install dependencies
-        run: yarn
+        run: npm install
       - name: Build
-        run: yarn build
+        run: npm run build
       - name: Commit changes
         run: |
           git config --global user.email "shuxhan@163.com"
