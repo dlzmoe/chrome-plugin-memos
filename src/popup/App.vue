@@ -12,7 +12,7 @@
       <div class="list">
         <div class="item" v-for="(item, index) in list" :key="index" :data-id="item.id">
           <div class="date">{{ formatDate(item.createdTs) }}</div>
-          <div class="content">
+          <div @dblclick="goEditItem($event)">
             <vue-simple-markdown :source="item.content"></vue-simple-markdown>
           </div>
           <span class="deleteNote" @click="deleteNote($event)">delete!</span>
@@ -30,15 +30,17 @@
         <input placeholder="abc-abc-123" type="text" v-model="openId" />
       </div>
       <button @click="save" class="save">保存</button>
-      <br /><br />
-      <p>目前版本仅可查看笔记信息，暂不可编辑，发布。</p>
-      <p>开发者：子舒</p>
+      <div class="about">
+        <p>目前版本仅可查看笔记信息，暂不可编辑，发布。</p>
+        <p>开发者：子舒</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import './app.scss';
 export default {
   data() {
     return {
@@ -65,7 +67,6 @@ export default {
             resourceIdList: [],
           })
           .then((response) => {
-            console.log(response.data);
             this.textarea = '';
             this.getList();
           })
@@ -78,35 +79,47 @@ export default {
       }
 
     },
-    // 获取数据
+    // 获取数据列表
     getList() {
       axios
         .get(this.site + "/api/memo?openId=" + this.openId + '&rowStatus=NORMAL')
         .then((response) => {
           this.list = response.data.data;
           this.listerr = false;
-          console.log(this.list);
         })
         .catch((error) => {
           console.error(error);
           this.listerr = true;
         });
     },
-    // 归档某笔记
+    // 归档单篇笔记
     deleteNote() {
       const id = event.currentTarget.parentNode.dataset.id;
-      console.log(id); // 在这里可以获取到当前被点击的元素的data-id属性值
       axios.patch(this.site + "/api/memo/" + id, {
         id: id,
         rowStatus: "ARCHIVED",
       })
         .then(response => {
-          console.log(response.data);
           this.getList();
         })
         .catch(error => {
           console.error(error);
         });
+    },
+    // 双击笔记进入编辑状态
+    goEditItem() {
+      const id = event.currentTarget.parentNode.dataset.id;
+      console.log(id); // 在这里可以获取到当前被点击的元素的data-id属性值
+      axios.get(this.site + "/api/memo/" + id)
+        .then(response => {
+          console.log(response.data);
+          this.textarea = response.data.data.content;
+        })
+        .catch(error => {
+          console.error(error);
+        });
+
+      // 如果是历史笔记需要 PATCH PATCH
     },
     golist() {
       this.box1 = true;
@@ -142,164 +155,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-::-webkit-scrollbar {
-  width: 4px;
-  height: 5px;
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ccc;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 0.8em;
-  background-clip: padding-box;
-}
-
-body {
-  width: 500px;
-  height: 600px;
-}
-
-.body {
-  min-height: 600px;
-  background: #f3f3f3;
-}
-
-.tags {
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  margin-bottom: 0 !important;
-  padding: 10px;
-  background: #f3f3f3;
-  z-index: 9;
-
-  li {
-    margin-right: 10px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 13px;
-    cursor: pointer;
-    user-select: none;
-
-    &.active {
-      background: #333;
-      color: #fff;
-    }
-  }
-}
-
-.tabcontent {
-  padding: 10px;
-}
-
-.list {
-  .item {
-    position: relative;
-    margin-bottom: 10px;
-    max-width: 100%;
-    padding: 15px;
-    border-radius: 5px;
-    background: #fff;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
-    word-break: break-all;
-
-    &:hover {
-      .deleteNote {
-        display: block;
-      }
-    }
-
-    .date {
-      font-size: 14px;
-      color: #999;
-    }
-
-    .deleteNote {
-      position: absolute;
-      right: 10px;
-      bottom: 4px;
-      cursor: pointer;
-      user-select: none;
-      display: none;
-    }
-  }
-}
-
-.setting {
-  font-size: 15px;
-
-  .item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    span {
-      width: 50px;
-    }
-  }
-
-  input {
-    flex: 1;
-    outline: none;
-    border: 1px solid #999;
-    border-radius: 4px;
-    padding: 4px 10px;
-    width: 100%;
-  }
-
-  .save {
-    background: #333;
-    outline: none;
-    border: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    color: #fff;
-    width: 100px;
-    height: 30px;
-    cursor: pointer;
-    transition: all 0.1s linear;
-
-    &:hover {
-      opacity: 0.9;
-    }
-  }
-}
-
-.textarea-wrap {
-  position: relative;
-  margin-bottom: 10px;
-  height: 100px;
-  width: 100%;
-
-  textarea {
-    outline: none;
-    border: 1px solid #dbdbdb;
-    width: 100%;
-    resize: none;
-    height: 100%;
-    border-radius: 4px;
-    padding: 4px 8px;
-  }
-
-  button {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    background: #333;
-    color: #fff;
-    border-radius: 4px;
-    padding: 2px 8px;
-    cursor: pointer;
-    user-select: none;
-  }
-
-}
-</style>
