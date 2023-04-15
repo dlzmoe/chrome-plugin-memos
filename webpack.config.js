@@ -7,8 +7,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 
-
-
 // eslint-disable-next-line
 function configFunc(env, argv) {
   const isDevMode = env.NODE_ENV === 'development'

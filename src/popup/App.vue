@@ -30,7 +30,7 @@
         <input placeholder="https://memos.com" type="text" v-model="site" />
       </div>
       <div class="item">
-        <span>ID：</span>
+        <span>openId：</span>
         <input placeholder="abc-abc-123" type="text" v-model="openId" />
       </div>
       <button @click="save" class="save">保存</button>
