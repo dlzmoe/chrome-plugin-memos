@@ -36,7 +36,8 @@
       <button @click="save" class="save">保存</button>
       <div class="about">
         <p>热爱生活，热爱开源，我是子舒。</p>
-        <p>Github: <a href="https://github.com/lovezsh/chrome-plugin-memos">https://github.com/lovezsh/chrome-plugin-memos</a></p>
+        <p>Github: <a href="https://github.com/lovezsh/chrome-plugin-memos"
+            target="_blank">https://github.com/lovezsh/chrome-plugin-memos</a></p>
       </div>
     </div>
   </div>
@@ -77,6 +78,12 @@ export default {
           .then((response) => {
             this.textarea = '';
             this.getList();
+            const noti = this.$vs.notification({
+              position: 'top-center',
+              color: '#000',
+              duration: '3000',
+              title: '😁发布成功！',
+            })
           })
           .catch((error) => {
             console.error(error);
@@ -111,6 +118,12 @@ export default {
       })
         .then(response => {
           this.getList();
+          const noti = this.$vs.notification({
+            position: 'top-center',
+            color: '#000',
+            duration: '3000',
+            title: '🐵删除成功！但处于归档状态，可在原网站中进行操作！',
+          })
         })
         .catch(error => {
           console.error(error);
@@ -172,20 +185,17 @@ export default {
     save() {
       localStorage.setItem("site", JSON.stringify(this.site));
       localStorage.setItem("openId", JSON.stringify(this.openId));
-      this.openNotification();
+      const noti = this.$vs.notification({
+        position: 'top-center',
+        color: '#000',
+        duration: '1000',
+        title: '😁保存成功！',
+      })
 
       this.getList();
       this.box1 = true;
       this.box2 = false;
     },
-    openNotification(position = null) {
-      const noti = this.$vs.notification({
-        position: 'top-center',
-        color: '#000',
-        duration: '1000',
-        title: '保存成功！',
-      })
-    }
   },
   mounted() {
     this.site = JSON.parse(localStorage.getItem("site"));

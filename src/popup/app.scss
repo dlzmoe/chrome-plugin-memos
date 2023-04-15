@@ -47,9 +47,7 @@ button {
   outline: none;
   background: #333;
   color: #fff;
-  border-radius: 4px;
   padding: 2px 15px;
-  min-width: 100px;
   height: 30px;
   display: inline-flex;
   align-items: center;
@@ -171,6 +169,11 @@ body {
     position: absolute;
     bottom: 5px;
     right: 10px;
+
+    button {
+      border-radius: 4px;
+      min-width: 80px;
+    }
   }
 }
 
