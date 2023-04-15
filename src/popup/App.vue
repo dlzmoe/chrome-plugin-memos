@@ -81,7 +81,7 @@ export default {
             const noti = this.$vs.notification({
               position: 'top-center',
               color: '#000',
-              duration: '3000',
+              duration: '1000',
               title: '😁发布成功！',
             })
           })
@@ -90,7 +90,12 @@ export default {
           });
 
       } else {
-        alert('禁止留空');
+        const noti = this.$vs.notification({
+          position: 'top-center',
+          color: '#000',
+          duration: '1000',
+          title: '🫤留空不能成为笔记！',
+        })
       }
 
     },
@@ -189,7 +194,7 @@ export default {
         position: 'top-center',
         color: '#000',
         duration: '1000',
-        title: '😁保存成功！',
+        title: '😁配置保存成功！',
       })
 
       this.getList();
