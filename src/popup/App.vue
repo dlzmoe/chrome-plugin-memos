@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     // 发布笔记
-    setNote() {
+    async setNote() {
       if (this.textarea != '') {
         axios
           .post(this.site + "/api/memo", {
@@ -100,7 +100,7 @@ export default {
 
     },
     // 获取数据列表
-    getList() {
+    async getList() {
       const loading = this.$vs.loading();
       axios
         .get(this.site + "/api/memo?openId=" + this.openId + '&rowStatus=NORMAL')
@@ -115,7 +115,7 @@ export default {
         });
     },
     // 归档单篇笔记
-    deleteNote() {
+    async deleteNote() {
       const id = event.currentTarget.parentNode.dataset.id;
       axios.patch(this.site + "/api/memo/" + id, {
         id: id,
@@ -135,7 +135,7 @@ export default {
         });
     },
     // 双击笔记进入编辑状态
-    goEditItem() {
+    async goEditItem() {
       const id = event.currentTarget.parentNode.dataset.id;
       this.EditNoteId = id;
       axios.get(this.site + "/api/memo/" + id)
@@ -151,7 +151,7 @@ export default {
 
     },
     // 如果是历史笔记需要 PATCH 
-    saveEditNote() {
+    async saveEditNote() {
       const loading = this.$vs.loading();
       axios.patch(this.site + "/api/memo/" + this.EditNoteId, {
         content: this.textarea,
