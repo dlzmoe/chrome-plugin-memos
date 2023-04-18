@@ -2,7 +2,7 @@
 
 Boilerplate for Chrome extension using Vue.js and Webpack with hot-reload enabled.
 
-Memos的chrome插件。
+基于 Memos 的 chrome 扩展，使用 vue 进行开发，路由切换应速度更快。
 
 ## 使用方法
 
@@ -27,3 +27,8 @@ Memos的chrome插件。
 | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/3a6f074b6636ff8707f4a9d294149e5.6x3izcjwics0.webp) | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/54fd40d05feb4ef0f38bba0ee5df28f.5v6pu5m8no40.webp) |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230418/image.1xrmwqw6x50g.webp) |
+
+## 感谢
+
+- Memos: [https://github.com/usememos/memos](https://github.com/usememos/memos)
+- Vuesax UI: [https://github.com/lusaxweb/vuesax-next](https://github.com/lusaxweb/vuesax-next)
