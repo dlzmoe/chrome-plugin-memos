@@ -195,3 +195,17 @@ body {
 .vue-simple-markdown {
   font-size: 15px !important;
 }
+
+.content-inputs {
+  flex: 1;
+}
+
+.tags a {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.tags a:hover {
+  color: #0078d7;
+  text-decoration: line-through;
+}

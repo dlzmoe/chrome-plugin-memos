@@ -3,6 +3,11 @@
     <ul class="tags">
       <li @click="golist" v-bind:class="{ active: box1 }">列表</li>
       <li @click="setting" v-bind:class="{ active: box2 }">设置</li>
+      <template>
+        <div class="right content-inputs">
+          <vs-input autocomplete="off" v-model="keyword" placeholder="搜索..." v-on:input="filteredList" />
+        </div>
+      </template>
     </ul>
     <div class="tabcontent" v-show="box1">
       <div class="textarea-wrap" :class="{ isActive: isActive }">
@@ -13,6 +18,12 @@
           <button @click="saveEditNote()" v-show="editCommon">记下</button>
         </div>
       </div>
+      <!-- 搜索关键词 -->
+      <div class="tags" v-show="showkeyword">Keyword:
+        <a @click="clearKeyword">{{ keyword }}</a>
+      </div>
+
+      <!-- 数据输出列表 -->
       <div class="list">
         <div class="item" v-for="(item, index) in list" :key="index" :data-id="item.id">
           <div class="date">{{ formatDate(item.createdTs) }}</div>
@@ -79,19 +90,13 @@ export default {
       EditNoteId: "",
       common: true,
       editCommon: false,
+
+      // 搜索
+      keyword: '',
+      showkeyword: false,
     };
   },
   methods: {
-    // 抓取登陆网站的信息
-    async getMemosSite() {
-      axios.get('https://memos.zburu.com')
-        .then(response => {
-          console.log(response);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
     // 登录请求
     async Login() {
       if (this.site && this.username && this.password) {
@@ -209,6 +214,16 @@ export default {
         .get(this.site + "/api/memo?openId=" + this.openId + "&rowStatus=NORMAL")
         .then((response) => {
           this.list = response.data.data;
+
+          // 定义正则表达式，匹配#标签 内容格式的文本
+          // const hashtagRegex = /#([\u4e00-\u9fa5\w]+)\s+([\u4e00-\u9fa5\w\s]+)/g;
+          // // 循环遍历数组中的每个对象，对content属性进行替换
+          // this.list.forEach((item) => {
+          //   item.content = item.content.replace(hashtagRegex, "<a href='https://example.com/$1'>#$1</a>");
+          //   // 将修改后的内容插入到item中
+          //   console.log(item.content);
+          // });
+          // console.log(this.list);
           this.listerr = false;
           loading.close();
         })
@@ -284,6 +299,27 @@ export default {
       this.editCommon = false;
       this.common = true;
     },
+    // 搜索功能 -- 根据关键词生成列表
+    filteredList() {
+      if (this.keyword) {
+        const keyword = this.keyword.trim().toLowerCase();
+        if (!keyword) {
+          return this.list;
+        }
+        const arr = this.list.filter(item => item.content.toLowerCase().includes(keyword));
+        this.list = arr;
+        this.showkeyword = true;
+      } else {
+        this.getList();
+        this.showkeyword = false;
+      }
+    },
+    // 清除搜索
+    clearKeyword() {
+      this.keyword = '';
+      this.showkeyword = false;
+      this.getList();
+    },
     golist() {
       this.box1 = true;
       this.box2 = false;
@@ -306,7 +342,6 @@ export default {
       this.logintoOut = true;
     }
 
-    this.getMemosSite();
   },
   computed: {
     formatDate() {

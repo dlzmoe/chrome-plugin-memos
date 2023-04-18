@@ -15,17 +15,19 @@ Memos的chrome插件。
 
 ## 功能
 
-在设置中中输入网站域名、以及 openId进行配置。
+在设置中中输入网站域名、用户名，密码进行配置。
 
 **已开发**
 
 编辑，发布，归档，编辑历史笔记功能。
 
+2023/04/18: 完成搜索功能，优化ui演示，交互后全局提示。
+
 **未完成**
 
-标签，搜索功能。
+标签，~~搜索~~ 功能。
 
 
-| ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/3a6f074b6636ff8707f4a9d294149e5.6x3izcjwics0.webp) | ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/54fd40d05feb4ef0f38bba0ee5df28f.5v6pu5m8no40.webp) |
+| ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.1e8emruk0z34.webp) | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2n4hv0xp1380.webp) |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/20230415/e87276d5e179b5bf769a2b29bbefa7f.1dfnku7pz2ps.webp) |
+| ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.7q6dvgj5gy8.png) |![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2y2quv02vq80.webp) |
