@@ -47,9 +47,8 @@
         <p>基于 <a href="https://github.com/usememos/memos" target="_blank">Memos</a> 的 chrome 扩展，热爱生活，热爱开源，我是子舒。</p>
         <p>
           扩展 Github:
-          <a href="https://github.com/lovezsh/chrome-plugin-memos" target="_blank"
-            >https://github.com/lovezsh/chrome-plugin-memos</a
-          >
+          <a href="https://github.com/lovezsh/chrome-plugin-memos"
+            target="_blank">https://github.com/lovezsh/chrome-plugin-memos</a>
         </p>
       </div>
     </div>
@@ -83,6 +82,16 @@ export default {
     };
   },
   methods: {
+    // 抓取登陆网站的信息
+    async getMemosSite() {
+      axios.get('https://memos.zburu.com')
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     // 登录请求
     async Login() {
       if (this.site && this.username && this.password) {
@@ -92,7 +101,7 @@ export default {
             password: this.password,
           })
           .then((response) => {
-            console.log(response.data.data);
+            // console.log(response.data.data);
             this.openId = response.data.data.openId;
 
             // 登录成功后把基本信息存在 localStorage
@@ -141,6 +150,7 @@ export default {
           this.username = "";
           this.password = "";
 
+          // 清除缓存
           localStorage.clear();
           this.logintoIn = true;
           this.logintoOut = false;
@@ -284,8 +294,8 @@ export default {
     },
   },
   mounted() {
+
     this.site = JSON.parse(localStorage.getItem("site"));
-    // this.openId = JSON.parse(localStorage.getItem("openId"));
     this.username = JSON.parse(localStorage.getItem("username"));
     this.password = JSON.parse(localStorage.getItem("password"));
 
@@ -295,6 +305,8 @@ export default {
       this.logintoIn = false;
       this.logintoOut = true;
     }
+
+    this.getMemosSite();
   },
   computed: {
     formatDate() {
