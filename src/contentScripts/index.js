@@ -1,3 +1,3 @@
-import './index.sass'
+import './index.scss';
 
-console.log('Content script working...')
+console.log('Content script working...');

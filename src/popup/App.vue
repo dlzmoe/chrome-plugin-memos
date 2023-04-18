@@ -36,8 +36,12 @@
       <button @click="save" class="save">保存</button>
       <div class="about">
         <p>热爱生活，热爱开源，我是子舒。</p>
-        <p>Github: <a href="https://github.com/lovezsh/chrome-plugin-memos"
-            target="_blank">https://github.com/lovezsh/chrome-plugin-memos</a></p>
+        <p>
+          Github:
+          <a href="https://github.com/lovezsh/chrome-plugin-memos" target="_blank"
+            >https://github.com/lovezsh/chrome-plugin-memos</a
+          >
+        </p>
       </div>
     </div>
   </div>
@@ -45,7 +49,7 @@
 
 <script>
 import axios from "axios";
-import './app.scss';
+import "./app.scss";
 export default {
   data() {
     return {
@@ -60,7 +64,7 @@ export default {
       // 编辑框
       isActive: false,
       textarea: "",
-      EditNoteId: '',
+      EditNoteId: "",
       common: true,
       editCommon: false,
     };
@@ -68,7 +72,7 @@ export default {
   methods: {
     // 发布笔记
     async setNote() {
-      if (this.textarea != '') {
+      if (this.textarea != "") {
         axios
           .post(this.site + "/api/memo", {
             content: this.textarea,
@@ -76,34 +80,32 @@ export default {
             resourceIdList: [],
           })
           .then((response) => {
-            this.textarea = '';
+            this.textarea = "";
             this.getList();
             const noti = this.$vs.notification({
-              position: 'top-center',
-              color: '#000',
-              duration: '1000',
-              title: '😁发布成功！',
-            })
+              position: "top-center",
+              color: "#000",
+              duration: "1000",
+              title: "😁发布成功！",
+            });
           })
           .catch((error) => {
             console.error(error);
           });
-
       } else {
         const noti = this.$vs.notification({
-          position: 'top-center',
-          color: '#000',
-          duration: '1000',
-          title: '🫤留空不能成为笔记！',
-        })
+          position: "top-center",
+          color: "#000",
+          duration: "1000",
+          title: "🫤留空不能成为笔记！",
+        });
       }
-
     },
     // 获取数据列表
     async getList() {
       const loading = this.$vs.loading();
       axios
-        .get(this.site + "/api/memo?openId=" + this.openId + '&rowStatus=NORMAL')
+        .get(this.site + "/api/memo?openId=" + this.openId + "&rowStatus=NORMAL")
         .then((response) => {
           this.list = response.data.data;
           this.listerr = false;
@@ -117,20 +119,21 @@ export default {
     // 归档单篇笔记
     async deleteNote() {
       const id = event.currentTarget.parentNode.dataset.id;
-      axios.patch(this.site + "/api/memo/" + id, {
-        id: id,
-        rowStatus: "ARCHIVED",
-      })
-        .then(response => {
+      axios
+        .patch(this.site + "/api/memo/" + id, {
+          id: id,
+          rowStatus: "ARCHIVED",
+        })
+        .then((response) => {
           this.getList();
           const noti = this.$vs.notification({
-            position: 'top-center',
-            color: '#000',
-            duration: '3000',
-            title: '🐵删除成功！但处于归档状态，可在原网站中进行操作！',
-          })
+            position: "top-center",
+            color: "#000",
+            duration: "3000",
+            title: "🐵删除成功！但处于归档状态，可在原网站中进行操作！",
+          });
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
@@ -138,44 +141,45 @@ export default {
     async goEditItem() {
       const id = event.currentTarget.parentNode.dataset.id;
       this.EditNoteId = id;
-      axios.get(this.site + "/api/memo/" + id)
-        .then(response => {
+      axios
+        .get(this.site + "/api/memo/" + id)
+        .then((response) => {
           this.isActive = true;
           this.textarea = response.data.data.content;
           this.editCommon = true;
           this.common = false;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-
     },
-    // 如果是历史笔记需要 PATCH 
+    // 如果是历史笔记需要 PATCH
     async saveEditNote() {
       const loading = this.$vs.loading();
-      axios.patch(this.site + "/api/memo/" + this.EditNoteId, {
-        content: this.textarea,
-        id: this.EditNoteId,
-        resourceIdList: [],
-        rowStatus: "NORMAL",
-      })
-        .then(response => {
+      axios
+        .patch(this.site + "/api/memo/" + this.EditNoteId, {
+          content: this.textarea,
+          id: this.EditNoteId,
+          resourceIdList: [],
+          rowStatus: "NORMAL",
+        })
+        .then((response) => {
           this.isActive = false;
           this.getList();
           loading.close();
-          this.textarea = '';
+          this.textarea = "";
 
           this.editCommon = false;
           this.common = true;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
     },
     // 取消编辑
     cancelEdit() {
       this.isActive = false;
-      this.textarea = '';
+      this.textarea = "";
       this.editCommon = false;
       this.common = true;
     },
@@ -187,15 +191,16 @@ export default {
       this.box1 = false;
       this.box2 = true;
     },
+    // 保存配置
     save() {
       localStorage.setItem("site", JSON.stringify(this.site));
       localStorage.setItem("openId", JSON.stringify(this.openId));
       const noti = this.$vs.notification({
-        position: 'top-center',
-        color: '#000',
-        duration: '1000',
-        title: '😁配置保存成功！',
-      })
+        position: "top-center",
+        color: "#000",
+        duration: "1000",
+        title: "😁配置保存成功！",
+      });
 
       this.getList();
       this.box1 = true;

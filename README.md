@@ -1,7 +1,5 @@
 # chrome-plugin-memos
 
-https://github.com/lovezsh/chrome-plugin-memos
-
 Boilerplate for Chrome extension using Vue.js and Webpack with hot-reload enabled.
 
 Memos的chrome插件。
