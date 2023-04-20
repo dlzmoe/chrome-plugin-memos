@@ -31,8 +31,3 @@ Memos的chrome插件。
 | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.1e8emruk0z34.webp) | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2n4hv0xp1380.webp) |
 | ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.7q6dvgj5gy8.png) |![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2y2quv02vq80.webp) |
-
-## 感谢
-
-- Memos: [https://github.com/usememos/memos](https://github.com/usememos/memos)
-- Vuesax UI: [https://github.com/lusaxweb/vuesax-next](https://github.com/lusaxweb/vuesax-next)

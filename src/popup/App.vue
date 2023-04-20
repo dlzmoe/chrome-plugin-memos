@@ -3,11 +3,11 @@
     <ul class="tags">
       <li @click="golist" v-bind:class="{ active: box1 }">列表</li>
       <li @click="setting" v-bind:class="{ active: box2 }">设置</li>
-      <template>
+      <!-- <template>
         <div class="right content-inputs">
           <vs-input autocomplete="off" v-model="keyword" placeholder="搜索..." v-on:input="filteredList" />
         </div>
-      </template>
+      </template> -->
     </ul>
     <div class="tabcontent" v-show="box1">
       <div class="textarea-wrap" :class="{ isActive: isActive }">
