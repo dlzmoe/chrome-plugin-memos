@@ -18,7 +18,7 @@ Memos 的 chrome 插件。
 
 ## 使用
 
-下载已打包好的 dist-zip 文件 [releases](https://github.com/zishume/chrome-plugin-memos/releases/tag/1.0)，解压拖拽到 chrome 扩展中。
+下载已打包好的 dist-zip 文件 [releases](https://github.com/zishume/chrome-plugin-memos/releases/tag/1.0)，无需解压，将 zip文件 拖拽到 chrome 扩展中。
 
 **提供两种显示方式**
 
