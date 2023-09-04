@@ -28,7 +28,7 @@ Memos 的 chrome 插件。
 
 **2. 扩展页面**
 
-将下面网址收藏到导航栏，点击即可打开。
+进入 [chrome://extensions/](chrome://extensions/) 查看 Memos 插件 1.0.0 下方的id，将下面的 `gdoomfiohdlmgpefhknbligngcfcndac` 替换掉。
 
 ```
 chrome-extension://gdoomfiohdlmgpefhknbligngcfcndac/options.html
