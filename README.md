@@ -1,17 +1,58 @@
-# chrome-plugin-memos
+## chrome-plugin-memos
+
+![GitHub license](https://img.shields.io/github/license/zishume/chrome-plugin-memos)
+![GitHub Repo stars](https://img.shields.io/github/stars/zishume/chrome-plugin-memos)
+![GitHub issues](https://img.shields.io/github/issues/zishume/chrome-plugin-memos)
+![GitHub forks](https://img.shields.io/github/forks/zishume/chrome-plugin-memos)
+![GitHub commit](https://img.shields.io/github/commit-activity/t/zishume/chrome-plugin-memos)
+![GitHub followers](https://img.shields.io/github/followers/zishume)
+![Discord](https://img.shields.io/discord/1126519222172925952)
+
 
 https://github.com/lovezsh/chrome-plugin-memos
 
 Boilerplate for Chrome extension using Vue.js and Webpack with hot-reload enabled.
 
-Memos的chrome插件。
+Memos 的 chrome插件。
 
-## use
+经过测试，通过 api 打开扩展显示笔记要比原网站速度快2-3倍。估计是memos网站功能太多导致，现在我只把 memos 网站用做 api 后台管理，日常写笔记用扩展打开，体验感很好。
+
+## 使用
 
 1. 下载已打包好的 dist-zip 文件，解压拖拽到 chrome 扩展中。
 2. `npm run build` 重新构建
 
 因为没有开发者账号，所以无法上架商店，后续考虑开个谷歌开发者账号。
+
+可以选择在右上角扩展小弹窗打开也可以选择扩展页面。
+
+
+**提供两种显示方式**
+
+**1. 弹窗**
+
+![1693821747158](https://imgurl.zishu.me/images/1693821747158.jpg)
+
+**2. 扩展页面**
+
+将下面网址收藏到导航栏，点击即可打开。
+
+```
+chrome-extension://gdoomfiohdlmgpefhknbligngcfcndac/options.html
+```
+
+![1693821450418](https://imgurl.zishu.me/images/1693821450418.jpg)
+
+## 开发
+
+```
+npm install
+npm run dev
+```
+
+将 `dist` 文件拖动到chrome扩展程序中。
+
+![1693821942444](https://imgurl.zishu.me/images/1693821942444.jpg)
 
 ## 功能
 
@@ -21,13 +62,7 @@ Memos的chrome插件。
 
 编辑，发布，归档，编辑历史笔记功能。
 
-2023/04/18: 完成搜索功能，优化ui演示，交互后全局提示。
+## 演示
 
-**未完成**
-
-标签，~~搜索~~ 功能。
-
-
-| ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.1e8emruk0z34.webp) | ![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2n4hv0xp1380.webp) |
-| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| ![](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.7q6dvgj5gy8.png) |![image](https://cdn.staticaly.com/gh/lovezsh/pic-cdn@main/image.2y2quv02vq80.webp) |
+![1693821385911](https://imgurl.zishu.me/images/1693821385911.jpg)
+![1693821450418](https://imgurl.zishu.me/images/1693821450418.jpg)

@@ -58,8 +58,8 @@
         <p>基于 <a href="https://github.com/usememos/memos" target="_blank">Memos</a> 的 chrome 扩展，热爱生活，热爱开源，我是子舒。</p>
         <p>
           扩展 Github:
-          <a href="https://github.com/lovezsh/chrome-plugin-memos"
-            target="_blank">https://github.com/lovezsh/chrome-plugin-memos</a>
+          <a href="https://github.com/zishume/chrome-plugin-memos"
+            target="_blank">https://github.com/zishume/chrome-plugin-memos</a>
         </p>
       </div>
     </div>
