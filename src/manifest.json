@@ -1,6 +1,8 @@
 {
   "background": {
-    "scripts": ["./background.js"]
+    "scripts": [
+      "./background.js"
+    ]
   },
   "browser_action": {
     "default_icon": "./assets/icon-128.png",
@@ -9,8 +11,13 @@
   "content_scripts": [
     {
       "all_frames": false,
-      "js": ["./contentScripts.js"],
-      "matches": ["http://*/*", "https://*/*"],
+      "js": [
+        "./contentScripts.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
       "run_at": "document_end"
     }
   ],
@@ -28,6 +35,13 @@
     "chrome_style": false,
     "page": "./options.html"
   },
-  "permissions": ["http://*/*", "https://*/*", "storage", "tabs", "webRequest"],
-  "version": "1.0.0"
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "webRequest"
+  ],
+  "version": "1.0.0",
+  "options_page": "options.html"
 }

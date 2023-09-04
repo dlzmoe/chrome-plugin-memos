@@ -7,6 +7,7 @@
   "dependencies": {
     "axios": "^1.3.5",
     "bulma-fluent": "^0.4.3",
+    "marked": "^8.0.0",
     "vue": "^2.6.11",
     "vue-simple-markdown": "^1.1.5",
     "vuesax": "^4.0.1-alpha.25"
