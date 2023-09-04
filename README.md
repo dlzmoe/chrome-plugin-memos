@@ -8,12 +8,11 @@
 ![GitHub followers](https://img.shields.io/github/followers/zishume)
 ![Discord](https://img.shields.io/discord/1126519222172925952)
 
+在线文档: https://zishume.github.io/chrome-plugin-memos/
 
-https://github.com/lovezsh/chrome-plugin-memos
+>因为没有开发者账号，所以无法上架商店，后续考虑开个谷歌开发者账号，使用方法在下方。
 
-Boilerplate for Chrome extension using Vue.js and Webpack with hot-reload enabled.
-
-Memos 的 chrome插件。
+Memos 的 chrome 插件。
 
 经过测试，通过 api 打开扩展显示笔记要比原网站速度快2-3倍。估计是memos网站功能太多导致，现在我只把 memos 网站用做 api 后台管理，日常写笔记用扩展打开，体验感很好。
 
@@ -21,10 +20,6 @@ Memos 的 chrome插件。
 
 1. 下载已打包好的 dist-zip 文件，解压拖拽到 chrome 扩展中。
 2. `npm run build` 重新构建
-
-因为没有开发者账号，所以无法上架商店，后续考虑开个谷歌开发者账号。
-
-可以选择在右上角扩展小弹窗打开也可以选择扩展页面。
 
 
 **提供两种显示方式**
