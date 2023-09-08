@@ -28,7 +28,7 @@ function saveSettings(updated) {
 chrome.runtime.onMessage.addListener((message) => {
   if (!settings.isEnabled) return
 
-  console.log(message, settings)
+  // console.log(message, settings)
 })
 
 chrome.runtime.onInstalled.addListener(() => {
