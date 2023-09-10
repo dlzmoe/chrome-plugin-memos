@@ -3,6 +3,7 @@
     <ul class="tags">
       <li @click="golist" v-bind:class="{ active: box1 }">列表</li>
       <li @click="setting" v-bind:class="{ active: box2 }">设置</li>
+      <li @click="pages">Options</li>
       <!-- <template>
         <div class="right content-inputs">
           <vs-input autocomplete="off" v-model="keyword" placeholder="搜索..." v-on:input="filteredList" />
@@ -98,6 +99,11 @@ export default {
     };
   },
   methods: {
+    pages() {
+      const extensionID = chrome.runtime.id;
+      console.log(extensionID);
+      window.open("chrome-extension://" + extensionID + "/options.html", "_blank");
+    },
     // 登录请求
     async Login() {
       if (this.site && this.username && this.password) {

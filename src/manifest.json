@@ -22,7 +22,7 @@
     }
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "description": "memos chrome插件",
+  "description": "一款基于Memos的chrome扩展",
   "icons": {
     "16": "./assets/icon-16.png",
     "32": "./assets/icon-32.png",
@@ -30,18 +30,12 @@
     "128": "./assets/icon-128.png"
   },
   "manifest_version": 2,
-  "name": "Memos 插件",
+  "name": "Memos",
   "options_ui": {
     "chrome_style": false,
     "page": "./options.html"
   },
-  "permissions": [
-    "http://*/*",
-    "https://*/*",
-    "storage",
-    "tabs",
-    "webRequest"
-  ],
-  "version": "1.0.0",
-  "options_page": "options.html"
+  "permissions": [],
+  "version": "2.0",
+  "options_page": "./options.html"
 }
